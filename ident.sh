@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # A script which blinks the Activity LED on a Rasberry Pi
-# about 20 times over 10 seconds
+# 20 times over approximately 20 seconds
 # Purpose: To help identify an individual Raspberry Pi in a group
 # This script needs to be run with elevated priviledges (sudo)
 # Tested on a Rasberry Pi Model B+ but should work on any Pi
