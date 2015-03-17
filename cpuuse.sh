@@ -19,4 +19,4 @@
 # Alternatively, $8 = id = the % of CPU that is idle
 # 100% - idle% = usage %
 usage=$(top -bn 2 -d 0.1 | grep '%Cpu(s):' | tail -n 1 | awk '{ print 100-$8 }')
-echo "CPU Usage: "$usage"%"
+echo "CPU Use: "$usage" %"
