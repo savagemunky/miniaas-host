@@ -17,6 +17,9 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # The name this script will use to identify itself when writing to the Syslog
 slogid="resource-use-collector"
 
+# The interface the script should use to find this hosts IP Address
+ifce="br0" #eth0
+
 # Database client
 db_client="mysql"
 
@@ -50,7 +53,7 @@ loghn=$(hostname)
 
 
 # Get IP Address
-ipaddr=$(ifconfig eth0 | grep "inet addr" | tr ":" " " | awk -F" " '{ print $3 }')
+ipaddr=$(ifconfig $ifce | grep "inet addr" | tr ":" " " | awk -F" " '{ print $3 }')
 #echo "DEBUG: Resource Usage for IP Address: $ipaddr"
 
 # Get CPU Usage
