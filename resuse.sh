@@ -31,12 +31,12 @@ dbp="-p"
 # Database configuration
 db_host="172.16.0.200"
 db_name="miniaas"
-db_usr="pi"
-db_pwd="pi"
-tblname="host_stats"
+db_usr="miniaas"
+db_pwd="miniaas"
+tblname="ControlServer_host_stats"
 
 # Database column namess
-col1="ip_address"
+col1="log_time"
 col2="cpu_use"
 col3="mem_total"
 col4="mem_used"
@@ -44,6 +44,7 @@ col5="mem_free"
 col6="store_total"
 col7="store_used"
 col8="store_free"
+col9="ip_address_id"
 
 # Logging variables (date, time and hostname)
 logdt=$(date +"%b %d %T")
@@ -76,7 +77,7 @@ storfree=$(df -m | grep /dev/ | awk -F" " '{ freecol+=$4 } END { print freecol }
 if $db_client $dbh$db_host $dbu$db_usr $dbp$db_pwd $db_name -e exit &> /dev/null
 then
    # Insert the collected statistics into the database
-   ins="INSERT INTO $tblname ($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8) VALUES ('$ipaddr', '$cpuused', '$memtotal', '$memused', '$memfree', '$stortotal', '$storused', '$storfree');"
+   ins="INSERT INTO $tblname ($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8, $col9) VALUES (now(), '$cpuused', '$memtotal', '$memused', '$memfree', '$stortotal', '$storused', '$storfree', '$ipaddr');"
    echo $ins | $db_client $dbh$db_host $dbu$db_usr $dbp$db_pwd $db_name 2> resuse.err;
 
    if [ $? -eq 0 ]
